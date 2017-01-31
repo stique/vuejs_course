@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>4</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .demo {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            display: inline-block;
+            margin: 10px;
+        }
+        .red {
+            background-color: red;
+        }
+        .blue {
+            background-color: blue;
+        }
+        .green {
+            background-color: green !important;
+        }
+        #effect {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+        .highlight {
+            background-color: red;
+            width: 200px !important;
+        }
+        .shrink {
+            background-color: gray;
+            width: 50px !important;
+        }
+        .class-one {
+            background-color: red;
+        }
+        .class-two {
+            border: 3px solid gray;
+        }
+        .second-div-class {
+            background-color: brown;
+            width: 500px;
+            height: 100px;
+        }
+        .third-div-class {
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+        }
+        .prog-bar {
+            height: 50px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="demo" @click="attachRed = !attachRed" :class="cssClass"></div>
+        <div class="demo"></div>
+        <div class="demo" :class="[color, cssClass]"></div>
+        <hr />
+        <input type="text" v-model="color" />
+    </div>
+    <div id="app2">
+        <div class="demo" :style="cssStyle"></div>
+        <div class="demo" :style="[cssStyle, { height: width + 'px' }]"></div>
+        <div class="demo"></div>
+        <hr />
+        <input type="text" v-model="color" />
+        <input type="text" v-model="width" />
+    </div>
+    <div id="exercise">
+        <!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval tick (attach respective class to the div with id "effect" below) -->
+        <div>
+            <button @click="startEffect()">Start Effect</button>
+            <div id="effect" :class="divClass"></div>
+        </div>
+        <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
+        <div :class="['class-one', 'class-two']">I got no class :(</div>
+        <!-- 3) Let the user enter a class (create some example classes) and attach it -->
+        <div>
+            <input type="text" v-model="secondDivClass">
+            <div :class="secondDivClass"></div>
+        </div>
+        <!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
+        <div>
+            <input type="text" v-model="thirdDivClass">
+            <input type="text" v-model="isGreen">
+            <div :class="[thirdDivClass, {green: isGreenComputed}]"></div>
+        </div>
+        <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
+        <div>
+            <input type="text" v-model="fourthDivBg">
+            <input type="text" v-model="fourthDivWidth">
+            <input type="text" v-model="fourthDivHeight">
+            <div :style="fourthDivStyle"></div>
+        </div>
+        <!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
+        <div>
+            <button @click="startProgress">Start Progress</button>
+            <div class="prog-bar" :style="progBarStyle"></div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#exercise',
+            data: {
+                highlight: false,
+                secondDivClass: 'second-div-class',
+                thirdDivClass: 'third-div-class',
+                isGreen: 'false',
+                fourthDivBg: 'white',
+                fourthDivWidth: 100,
+                fourthDivHeight: 100,
+                progBarWidth: 0
+            },
+            computed: {
+                divClass: function() {
+                    return {
+                        highlight: this.highlight,
+                        shrink: !this.highlight
+                    };
+                },
+                isGreenComputed: function() {
+                    return this.isGreen === 'true' ? true : false;
+                },
+                fourthDivStyle: function() {
+                    return {
+                        backgroundColor: this.fourthDivBg,
+                        width: this.fourthDivWidth + 'px',
+                        height: this.fourthDivHeight + 'px'
+                    };
+                },
+                progBarStyle: function() {
+                    return {
+                        width: this.progBarWidth + 'px',
+                    }
+                }
+            },
+            methods: {
+                startEffect: function() {
+                    var self = this;
+
+                    setInterval( function() {
+                        self.highlight = !self.highlight;
+                    }, 2000);
+                },
+                startProgress: function() {
+                    var self = this;
+
+                    setInterval( function() {
+                        self.progBarWidth += 1;
+                    }, 5);
+                },
+
+            }
+        });
+        new Vue({
+            el: '#app',
+            data: {
+                attachRed: false,
+                color: 'green'
+            },
+            computed: {
+                cssClass: function() {
+                    return {
+                        red: this.attachRed,
+                        blue: !this.attachRed
+                    };
+                }
+            }
+        });
+        new Vue({
+            el: '#app2',
+            data: {
+                color: 'green',
+                width: 100
+            },
+            computed: {
+                cssStyle: function() {
+                    return {
+                        backgroundColor: this.color, 
+                        width: this.width + 'px'
+                    };
+                }
+            }
+        });
+    </script>
+</body>
+</html>
