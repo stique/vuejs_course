@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>5</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="show">You can see me!</p>
+        <template v-else>
+            <h2>Some title</h2>
+            <p>But not me</p>
+        </template>
+        <p v-show="show">You can see me!</p>
+        <button @click="show = !show">Show</button>
+    </div>
+    <div id="app2">
+        <ul>
+            <li v-for="(ingredient, i) in ingredients">{{ ingredient }} {{i}}</li>
+        </ul>   
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+        });
+        new Vue({
+            el: '#app2',
+            data: {
+                ingredients: [ 'meat', 'fruit', 'cookies' ],
+                persons: [
+                    {
+                        name: 'Kirill',
+                        age: 33,
+                        color: 'red'
+                    },
+                    {
+                        name: 'Sonya',
+                        age: 'young',
+                        color: 'blue'
+                    },
+                ]
+            },
+        });
+    </script>
+</body>
+</html>
