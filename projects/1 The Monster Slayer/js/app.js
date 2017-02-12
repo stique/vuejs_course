@@ -51,7 +51,7 @@ new Vue( {
             }
         },
         heal : function() {
-            this.myHealth += Math.round( Math.random() * 10 );
+            this.myHealth = this.myHealth >= 100 ? 100 : this.myHealth + Math.round( Math.random() * 10 );
         },
         showDialog : function() {
             if ( confirm('Do yo give up?') ) {
