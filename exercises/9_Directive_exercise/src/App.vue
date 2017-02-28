@@ -27,7 +27,7 @@
         },
         methods: {
             clicked() {
-                alert('I was clicked');
+                alert('I was clicked'); 
             },
             mouseEntered() {
                 console.log('mouse entered');
