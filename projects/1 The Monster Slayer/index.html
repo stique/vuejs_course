@@ -43,22 +43,26 @@
             <button id="give-up" @click="showDialog">GIVE UP</button>
         </div>
     </section>
-    <section class="row log" v-if="log.length && isGameNow">
-        <div class="small-12 columns">
-            <ul>
-                <li v-for="item in log">
-                    <ul v-for="(value, key) in item">
-                        <li v-if="key == 'me'" style="background-color: blue">
-                            You hit monster for {{value}}.
-                        </li> 
-                        <li v-else style="background-color: red">
-                            Monster hits you for {{value}}.
-                        </li> 
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </section>
+    <transition name="fade" mode="out-in">
+        <section class="row log" v-if="log.length && isGameNow">
+            <div class="small-12 columns">
+                <ul>
+                    <transition-group name="fade" mode="out-in">
+                        <li v-for="(item, index) in log" key="index">
+                            <ul v-for="(value, key) in item">
+                                <li v-if="key == 'me'" style="background-color: blue">
+                                    You hit monster for {{value}}.
+                                </li> 
+                                <li v-else style="background-color: red">
+                                    Monster hits you for {{value}}.
+                                </li> 
+                            </ul>
+                        </li>
+                    </transition-group>
+                </ul>
+            </div>
+        </section>
+    </transition>
 </div>
 <script src="js/app.js"></script>
 </body>
