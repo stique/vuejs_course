@@ -1,13 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { stocks } from './stocks';
-import getters from './getters';
+import stocks from './stocks';
 
 Vue.use( Vuex );
 
-export const store = new Vuex.Store( {
-    state : {
-        stocks,
+export default new Vuex.Store( {
+    modules : {
+    	stocks,
     },
-    getters,
 } );

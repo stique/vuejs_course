@@ -5,7 +5,6 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex';
 	import Stock from './Stock.vue';
 	export default {
 		components: {
@@ -15,9 +14,6 @@
         	stocks() {
         		return this.$store.getters.getStocks;
         	}
-        },
-        created: () => {
-        	console.log(this.$store);
         }
 	}	
 

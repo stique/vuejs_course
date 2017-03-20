@@ -1,8 +1,11 @@
 <template>
-	<div class="panel panel-default">
-		<div class="panel-body">{{stock.name}} - {{stock.price}}</div>
-		<input type="text" v-model="quantity">
-		<button class="btn btn-primary" @click="buy">Buy</button>
+	<div class="col-sm-6 col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-body">{{stock.name}} - {{stock.price}}</div>
+			<input type="number" v-model="quantity" placeholder="Quantity">
+			<button class="btn btn-primary" @click="buy" 
+				:disabled="quantity <= 0 || !Number.isInteger(quantity)">Buy</button>
+		</div>
 	</div>
 </template>
 
@@ -10,18 +13,21 @@
 	export default {
 		data() {
 			return {
-				quantity: null
+				quantity: 0
 			};
 		},
 		props: ['stock'],
 		methods: {
 			buy() {
-				if ( this.quantity && this.quantity !== 0) {
-					alert('bought');
-				}
-				else {
-					alert('error');
-				}
+				const order = {
+					stockId: this.stock.id,
+					stockPrice: this.stock.price,
+					quantity: this.quantity
+				};
+
+				console.log(order);
+
+				this.quantity = 0;
 			}
 		}
 	}

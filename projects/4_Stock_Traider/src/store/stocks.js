@@ -1,56 +1,52 @@
-export const stocks = [
-    {
-        name  : 'BMW',
-        price : 110,
-    },
-    {
-        name  : 'Google',
-        price : 200,
-    },
-    {
-        name  : 'Apple',
-        price : 250,
-    },
-    {
-        name  : 'Twitter',
-        price : 8,
-    },
-];
+const state = {
+    stocks : [
+        {
+            id    : 1,
+            name  : 'BMW',
+            price : 110,
+        },
+        {
+            id    : 2,
+            name  : 'Google',
+            price : 200,
+        },
+        {
+            id    : 3,
+            name  : 'Apple',
+            price : 250,
+        },
+        {
+            id    : 4,
+            name  : 'Twitter',
+            price : 8,
+        },
+    ],
+};
 
-/*const getters = {
-    [types.DOUBLE_COUNTER] : state => {
-        return state.counter * 2;
-    },
-    [types.CLICK_COUNTER] : state => {
-        return state.counter + ' Clicks';
+const getters = {
+    getStocks : state => {
+        return state.stocks;
     },
 };
 
 const mutations = {
-    [types.MUTATE_INCREMENT_COUNTER] : ( state, payload ) => {
-        state.counter += payload;
+    'SET_STOCKS'( state, stocks ) {
+        state.stocks = stocks;
     },
-    [types.MUTATE_DECREMENT_COUNTER] : ( state, payload ) => {
-        state.counter -= payload;
+    'RND_STOCKS'( state ) {
+
     },
 };
 
 const actions = {
-    [types.COUNTER_INCREMENT] : ( { commit }, payload ) => {
-        commit( types.MUTATE_INCREMENT_COUNTER, payload );
+    buyStocks : ( { commit }, order ) => {
+        commit();
     },
-    [types.COUNTER_DECREMENT] : ( { commit }, payload ) => {
-        commit( types.MUTATE_DECREMENT_COUNTER, payload );
+    initStocks : ( { commit } ) => {
+        commit('SET_STOCKS');
     },
-    [types.COUNTER_INCREMENT_ASYNC] : ( { commit }, payload ) => {
-        setTimeout( () => {
-            commit( types.MUTATE_INCREMENT_COUNTER, payload.by );
-        }, payload.duration );
-    },
-    [types.COUNTER_DECREMENT_ASYNC] : ( { commit }, payload ) => {
-        setTimeout( () => {
-            commit( types.MUTATE_DECREMENT_COUNTER, payload.by );
-        }, payload.duration );
+    randomizeStocks : ( { commit } ) => {
+        commit('RND_STOCKS');
     },
 };
 
@@ -59,4 +55,4 @@ export default {
     mutations,
     actions,
     getters,
-};*/
+};
