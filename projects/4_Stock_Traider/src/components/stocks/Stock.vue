@@ -4,7 +4,7 @@
 			<div class="panel-body">{{stock.name}} - {{stock.price}}</div>
 			<input type="number" v-model="quantity" placeholder="Quantity">
 			<button class="btn btn-primary" @click="buy" 
-				:disabled="quantity <= 0 || !Number.isInteger(quantity)">Buy</button>
+				:disabled="quantity <= 0">Buy</button>
 		</div>
 	</div>
 </template>
@@ -13,7 +13,7 @@
 	export default {
 		data() {
 			return {
-				quantity: 0
+				quantity: 10
 			};
 		},
 		props: ['stock'],
@@ -25,7 +25,7 @@
 					quantity: this.quantity
 				};
 
-				console.log(order);
+				this.$store.dispatch('buyStocks', order);
 
 				this.quantity = 0;
 			}
